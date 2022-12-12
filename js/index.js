@@ -125,6 +125,16 @@ function loadMovies(id) {
 
 }
 
+function displayMenu(){
+    fetch("http://localhost:3000/films")
+    .then(response => response.json())
+    .then((data)=>{
+        const menuItems = data
+        menuItems.map(
+            menus => createMenuItem(menus.id, menus.poster,menus.title))
+    })
+}
+
 document.addEventListener("DOMContentLoaded", (event) => {
     print(`Event loaded: ${event.type}`);
 
