@@ -12,6 +12,7 @@ function appendElement(element, id = "animal-item-body") {
 
 function createMainItem(poster, title,runtime, showtime,id, capacity, tickets_sold) {
     // list to contain the elements
+    //divs styling
     let rootDiv = document.createElement("div")
     rootDiv.setAttribute("id", "root-div")
     rootDiv.classList.add("row", 'border-success','mt-3','w-100','m-auto')
@@ -60,6 +61,8 @@ function createMainItem(poster, title,runtime, showtime,id, capacity, tickets_so
     runTime.style.width = "33%"
     runTime.style.color = "blue"
 
+    // calculates available tickets and updates db.jason
+
 
     let availableTickets = capacity - tickets_sold
     let buyTicket = document.createElement("button");
@@ -97,7 +100,6 @@ function createMainItem(poster, title,runtime, showtime,id, capacity, tickets_so
 
         }
                 
-        //console.log(tickets_sold)
     })
     
 
@@ -119,7 +121,7 @@ function createMainItem(poster, title,runtime, showtime,id, capacity, tickets_so
     // return the element
     return rootDiv;
 }
-
+//creates side menu itesms
 function createMenuItem(id, poster,title){
 
     let rootDiv = document.getElementById("menus")
@@ -150,7 +152,7 @@ function createMenuItem(id, poster,title){
 
 
 }
-
+// funtion to load main movie(first movie display)
 function loadMovies(id) {
   
     fetch("http://localhost:3000/films/1")
@@ -171,7 +173,7 @@ function loadMovies(id) {
         })
 
 }
-
+//function to display menu items
 function displayMenu(){
     fetch("http://localhost:3000/films")
     .then(response => response.json())
@@ -181,7 +183,7 @@ function displayMenu(){
             menus => createMenuItem(menus.id, menus.poster,menus.title))
     })
 }
-
+// function that handles do display a different movie
 function handleMovieClicks(id){
     fetch(`http://localhost:3000/films/${id}`)
     .then(response => response.json())
