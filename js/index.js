@@ -61,6 +61,47 @@ function createMainItem(poster, title,runtime, showtime,id, capacity, tickets_so
     runTime.style.color = "blue"
 
 
+    let availableTickets = capacity - tickets_sold
+    let buyTicket = document.createElement("button");
+    if(availableTickets===0){
+        buyTicket.innerHTML= "sold out"
+    }else{
+        buyTicket.innerHTML = ` click to book ticket, ${availableTickets} available`
+
+    }   
+    
+    buyTicket.style.width = "33%"
+    buyTicket.classList.add("btn", "btn-success","ml-2")
+    buyTicket.addEventListener('click',(e)=>{
+        if(tickets_sold<capacity){
+            let avail = document.querySelector("button")
+            avail.innerText = ` click to book ticket, ${--availableTickets} available`
+            confirm("buy ticket?")
+            fetch(`http://localhost:3000/films/${id}`,{
+            method: "PATCH",
+  
+            body:JSON.stringify({
+              "tickets_sold": `${++ tickets_sold}`  
+            }),
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+            },          
+          })
+          .then((response) => response.json())
+          .then((json)=>console.log(json))
+          
+        }else {
+            alert("theatre is full")
+            let soldOut = document.querySelector("button")
+            soldOut.innerText = "sold out"
+
+        }
+                
+        //console.log(tickets_sold)
+    })
+    
+
+
     mainBody.appendChild(cardDiv)
     mainBody.appendChild(bodyDiv)
 
@@ -72,7 +113,8 @@ function createMainItem(poster, title,runtime, showtime,id, capacity, tickets_so
     cardDiv.append(moviePoster);
     cardDiv.append(movieTitle);
     bodyDiv.append(runTime)
-    bodyDiv.append(showTime)  
+    bodyDiv.append(showTime) 
+    bodyDiv.append(buyTicket) 
   
     // return the element
     return rootDiv;
@@ -90,8 +132,6 @@ function createMenuItem(id, poster,title){
     movieDiv.addEventListener('click',(e)=>{
         document.getElementById("root-div").remove()      
         handleMovieClicks(id)
-        
-        console.log(id)
     })
     
 
@@ -115,8 +155,7 @@ function loadMovies(id) {
   
     fetch("http://localhost:3000/films/1")
         .then(response => response.json())
-        .then((data) => {
-            console.log(data)                
+        .then((data) => {               
             const moviesItem = createMainItem(
             data.poster,
             data.title,
