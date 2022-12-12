@@ -87,6 +87,14 @@ function createMenuItem(id, poster,title){
     movieDiv.classList = ("film item")
     movieDiv.setAttribute("id", id);
 
+    movieDiv.addEventListener('click',(e)=>{
+        document.getElementById("root-div").remove()      
+        handleMovieClicks(id)
+        
+        console.log(id)
+    })
+    
+
     let moviePoster = document.createElement("img");
     moviePoster.src = poster;
     moviePoster.alt = `${title} image`;
@@ -133,6 +141,26 @@ function displayMenu(){
         menuItems.map(
             menus => createMenuItem(menus.id, menus.poster,menus.title))
     })
+}
+
+function handleMovieClicks(id){
+    fetch(`http://localhost:3000/films/${id}`)
+    .then(response => response.json())
+    .then((data) => {              
+        const moviesItem = createMainItem(
+        data.poster,
+        data.title,
+        data.runtime,
+        data.showtime,
+        data.id,
+        data.capacity,
+        data.tickets_sold
+        );
+        displayMenu()
+        appendElement(moviesItem, "main-display");   
+
+    })
+
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
