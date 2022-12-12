@@ -101,6 +101,27 @@ function createMenuItem(id, poster,title){
     movieDiv.append(movieTitle)
 
 
+}
+
+function loadMovies(id) {
+  
+    fetch("http://localhost:3000/films/1")
+        .then(response => response.json())
+        .then((data) => {
+            console.log(data)                
+            const moviesItem = createMainItem(
+            data.poster,
+            data.title,
+            data.runtime,
+            data.showtime,
+            data.id,
+            data.capacity,
+            data.tickets_sold
+            );
+            displayMenu()            
+            appendElement(moviesItem, "main-display");   
+
+        })
 
 }
 
