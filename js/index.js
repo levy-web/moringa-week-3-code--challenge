@@ -72,16 +72,36 @@ function createMainItem(poster, title,runtime, showtime,id, capacity, tickets_so
     cardDiv.append(moviePoster);
     cardDiv.append(movieTitle);
     bodyDiv.append(runTime)
-    bodyDiv.append(showTime)
-
-
-    
-
- 
-  
+    bodyDiv.append(showTime)  
   
     // return the element
     return rootDiv;
+}
+
+function createMenuItem(id, poster,title){
+
+    let rootDiv = document.getElementById("menus")
+
+    let movieDiv = document.createElement("li");
+    movieDiv.style.listStyle = "none"
+    movieDiv.classList = ("film item")
+    movieDiv.setAttribute("id", id);
+
+    let moviePoster = document.createElement("img");
+    moviePoster.src = poster;
+    moviePoster.alt = `${title} image`;
+    moviePoster.style.height = "100px";
+    moviePoster.style.width = "100px";
+
+    let movieTitle = document.createElement("h6");
+    movieTitle.innerHTML = title; 
+
+    rootDiv.appendChild(movieDiv)
+    movieDiv.append(moviePoster)
+    movieDiv.append(movieTitle)
+
+
+
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
