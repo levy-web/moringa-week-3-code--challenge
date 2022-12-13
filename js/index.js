@@ -10,7 +10,7 @@ function appendElement(element, id = "animal-item-body") {
 }
 
 
-function createMainItem(poster, title,runtime, showtime,id, capacity, tickets_sold) {
+function createMainItem(poster, title,runtime, showtime,id, capacity, tickets_sold, description) {
     // list to contain the elements
     //divs styling
     let rootDiv = document.createElement("div")
@@ -50,6 +50,9 @@ function createMainItem(poster, title,runtime, showtime,id, capacity, tickets_so
     // movies name content
     let movieTitle = document.createElement("h2");
     movieTitle.innerHTML = title; 
+
+    let movieDescription = document.createElement("p");
+    movieDescription.innerHTML = description; 
 
     let showTime = document.createElement("h4");
     showTime.innerHTML = `show time: ${showtime} `
@@ -114,6 +117,7 @@ function createMainItem(poster, title,runtime, showtime,id, capacity, tickets_so
     // append the image and text to root element
     cardDiv.append(moviePoster);
     cardDiv.append(movieTitle);
+    cardDiv.append(movieDescription)
     bodyDiv.append(runTime)
     bodyDiv.append(showTime) 
     bodyDiv.append(buyTicket) 
@@ -165,7 +169,8 @@ function loadMovies(id) {
             data.showtime,
             data.id,
             data.capacity,
-            data.tickets_sold
+            data.tickets_sold,
+            data.description
             );
             displayMenu()            
             appendElement(moviesItem, "main-display");   
@@ -195,7 +200,8 @@ function handleMovieClicks(id){
         data.showtime,
         data.id,
         data.capacity,
-        data.tickets_sold
+        data.tickets_sold,
+        data.description
         );
         displayMenu()
         appendElement(moviesItem, "main-display");   
