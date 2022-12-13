@@ -49,7 +49,7 @@ After complete installation, Confirm that json server in installed, if not run
 
 
 
-## running locally
+## Deployment
 
 open the json server by running the following command 
 
@@ -57,9 +57,13 @@ open the json server by running the following command
 
 you can now open the html with a browser to view the site.
 
-## Deployment
+
 
 deployed using github hosting but requires the db.json file running to view details of the site since its a local database.
+
+     https://levy-web.github.io/moringa-week-3-code--challenge/
+
+you need json server running locally
 
 
  
