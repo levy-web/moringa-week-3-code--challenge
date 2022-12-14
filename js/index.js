@@ -218,7 +218,4 @@ function handleMovieClicks(id){
 document.addEventListener("DOMContentLoaded", (event) => {
     print(`Event loaded: ${event.type}`);
     print(loadMovies())
-
-
-
 });
