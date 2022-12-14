@@ -51,19 +51,13 @@ After complete installation, Confirm that json server in installed, if not run
 
 ## Deployment
 
-open the json server by running the following command 
-
-     npx json-server --watch db.json
-
-you can now open the html with a browser to view the site.
 
 
-
-deployed using github hosting but requires the db.json file running to view details of the site since its a local database.
+deployed using github hosting, use the link below to view the site.
 
      https://levy-web.github.io/moringa-week-3-code--challenge/
 
-you need json server running locally
+
 
 
  
