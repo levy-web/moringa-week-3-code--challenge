@@ -92,8 +92,7 @@ function createMainItem(poster, title,runtime, showtime,id, capacity, tickets_so
               "tickets_sold": `${++ tickets_sold}`  
             }),
             headers: {
-                'Content-type': 'application/vnd.github.v3+json; charset=UTF-8'
-              //'Content-type': 'application/json; charset=UTF-8',
+              'Content-type': 'application/json; charset=UTF-8',
             },          
           })
           .then((response) => response.json())
@@ -218,6 +217,7 @@ function handleMovieClicks(id){
 document.addEventListener("DOMContentLoaded", (event) => {
     print(`Event loaded: ${event.type}`);
     print(loadMovies())
+    print(displayMenu())
 
 
 
