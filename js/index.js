@@ -1,3 +1,8 @@
+function print(value) {
+    console.log(value);
+}
+
+
 // appending item to an element
 function appendElement(element, id = "animal-item-body") {
     const rootElement = document.getElementById(id);
@@ -154,9 +159,11 @@ function createMenuItem(id, poster,title){
 // funtion to load main movie(first movie display)
 function loadMovies(id) {
   
-    fetch("https://levy-web.github.io/moringa-week-3-code--challenge/db.json/1")
+    fetch("https://levy-web.github.io/moringa-week-3-code--challenge/db.json")
         .then(response => response.json())
-        .then((data) => {               
+        .then((res) => {  
+            let data = (res.films)[0]
+            console.log(data)             
             const moviesItem = createMainItem(
             data.poster,
             data.title,
@@ -178,16 +185,17 @@ function displayMenu(){
     fetch("https://levy-web.github.io/moringa-week-3-code--challenge/db.json")
     .then(response => response.json())
     .then((data)=>{
-        const menuItems = data
+        const menuItems = data.films
         menuItems.map(
             menus => createMenuItem(menus.id, menus.poster,menus.title))
     })
 }
 // function that handles do display a different movie
 function handleMovieClicks(id){
-    fetch(`https://levy-web.github.io/moringa-week-3-code--challenge/db.json/${id}`)
+    fetch(`https://levy-web.github.io/moringa-week-3-code--challenge/db.json`)
     .then(response => response.json())
-    .then((data) => {              
+    .then((res) => {    
+        let data = (res.films)[id-1]          
         const moviesItem = createMainItem(
         data.poster,
         data.title,
