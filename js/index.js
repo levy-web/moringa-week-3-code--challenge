@@ -1,19 +1,3 @@
-const jsonServer = require('json-server');
-const server = jsonServer.create();
-const router = jsonServer.router('db.json');
-const middlewares = jsonServer.defaults();
-const port = process.env.PORT || 3200; 
-
-server.use(middlewares);
-server.use(router);
-
-server.listen(port);
-
-function print(value) {
-    console.log(value);
-}
-
-
 // appending item to an element
 function appendElement(element, id = "animal-item-body") {
     const rootElement = document.getElementById(id);
@@ -94,7 +78,7 @@ function createMainItem(poster, title,runtime, showtime,id, capacity, tickets_so
             let avail = document.querySelector("button")
             avail.innerText = ` click to book ticket, ${--availableTickets} available`
             confirm("buy ticket?")
-            fetch(`http://localhost:3000/films/${id}`,{
+            fetch(`https://levy-web.github.io/moringa-week-3-code--challenge/db.json/${id}`,{
             method: "PATCH",
   
             body:JSON.stringify({
@@ -170,7 +154,7 @@ function createMenuItem(id, poster,title){
 // funtion to load main movie(first movie display)
 function loadMovies(id) {
   
-    fetch("http://localhost:3000/films/1")
+    fetch("https://levy-web.github.io/moringa-week-3-code--challenge/db.json/1")
         .then(response => response.json())
         .then((data) => {               
             const moviesItem = createMainItem(
@@ -191,7 +175,7 @@ function loadMovies(id) {
 }
 //function to display menu items
 function displayMenu(){
-    fetch("http://localhost:3000/films")
+    fetch("https://levy-web.github.io/moringa-week-3-code--challenge/db.json")
     .then(response => response.json())
     .then((data)=>{
         const menuItems = data
@@ -201,7 +185,7 @@ function displayMenu(){
 }
 // function that handles do display a different movie
 function handleMovieClicks(id){
-    fetch(`http://localhost:3000/films/${id}`)
+    fetch(`https://levy-web.github.io/moringa-week-3-code--challenge/db.json/${id}`)
     .then(response => response.json())
     .then((data) => {              
         const moviesItem = createMainItem(
