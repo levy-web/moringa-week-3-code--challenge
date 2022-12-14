@@ -82,18 +82,21 @@ function createMainItem(poster, title,runtime, showtime,id, capacity, tickets_so
         if(tickets_sold<capacity){
             let avail = document.querySelector("button")
             avail.innerText = ` click to book ticket, ${--availableTickets} available`
+            console.log(capacity)
+            console.log(tickets_sold)
             confirm("buy ticket?")
-            fetch(`https://levy-web.github.io/moringa-week-3-code--challenge/db.json/${id}`,{
+            fetch(`https://levy-web.github.io/moringa-week-3-code--challenge/db.json/films/${id}`,{
             method: "PATCH",
   
             body:JSON.stringify({
               "tickets_sold": `${++ tickets_sold}`  
             }),
             headers: {
-              'Content-type': 'application/json; charset=UTF-8',
+                'Content-type': 'application/vnd.github.v3+json; charset=UTF-8'
+              //'Content-type': 'application/json; charset=UTF-8',
             },          
           })
-          .then((response) => response.json())
+          .then((response) => console.log(response.json()))
           .then((json)=>console.log(json))
           
         }else {
@@ -125,6 +128,8 @@ function createMainItem(poster, title,runtime, showtime,id, capacity, tickets_so
     // return the element
     return rootDiv;
 }
+
+
 //creates side menu itesms
 function createMenuItem(id, poster,title){
 
@@ -195,7 +200,7 @@ function handleMovieClicks(id){
     fetch(`https://levy-web.github.io/moringa-week-3-code--challenge/db.json`)
     .then(response => response.json())
     .then((res) => {    
-        let data = (res.films)[id-1]          
+        let data = (res.films)[id-1]
         const moviesItem = createMainItem(
         data.poster,
         data.title,
