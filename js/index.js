@@ -80,6 +80,7 @@ function createMainItem(poster, title,runtime, showtime,id, capacity, tickets_so
     buyTicket.classList.add("btn", "btn-success","ml-2")
     buyTicket.addEventListener('click',(e)=>{
         if(tickets_sold<capacity){
+            ++tickets_sold
             let avail = document.querySelector("button")
             avail.innerText = ` click to book ticket, ${--availableTickets} available`
             console.log(capacity)
@@ -89,7 +90,7 @@ function createMainItem(poster, title,runtime, showtime,id, capacity, tickets_so
             method: "PATCH",
   
             body:JSON.stringify({
-              "tickets_sold": `${++ tickets_sold}`  
+              "tickets_sold": tickets_sold  
             }),
             headers: {
               'Content-type': 'application/json; charset=UTF-8',
@@ -217,7 +218,6 @@ function handleMovieClicks(id){
 document.addEventListener("DOMContentLoaded", (event) => {
     print(`Event loaded: ${event.type}`);
     print(loadMovies())
-    print(displayMenu())
 
 
 
