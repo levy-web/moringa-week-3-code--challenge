@@ -85,7 +85,7 @@ function createMainItem(poster, title,runtime, showtime,id, capacity, tickets_so
             console.log(capacity)
             console.log(tickets_sold)
             confirm("buy ticket?")
-            fetch(`https://levy-web.github.io/moringa-week-3-code--challenge/db.json/films/${id}`,{
+            fetch(`https://my-json-server.typicode.com/levy-web/moringa-week-3-code--challenge/films/${id}`,{
             method: "PATCH",
   
             body:JSON.stringify({
@@ -164,11 +164,9 @@ function createMenuItem(id, poster,title){
 // funtion to load main movie(first movie display)
 function loadMovies(id) {
   
-    fetch("https://levy-web.github.io/moringa-week-3-code--challenge/db.json")
+    fetch("https://my-json-server.typicode.com/levy-web/moringa-week-3-code--challenge/films/1")
         .then(response => response.json())
-        .then((res) => {  
-            let data = (res.films)[0]
-            console.log(data)             
+        .then((data) => {            
             const moviesItem = createMainItem(
             data.poster,
             data.title,
@@ -187,20 +185,19 @@ function loadMovies(id) {
 }
 //function to display menu items
 function displayMenu(){
-    fetch("https://levy-web.github.io/moringa-week-3-code--challenge/db.json")
+    fetch("https://my-json-server.typicode.com/levy-web/moringa-week-3-code--challenge/films")
     .then(response => response.json())
     .then((data)=>{
-        const menuItems = data.films
+        const menuItems = data
         menuItems.map(
             menus => createMenuItem(menus.id, menus.poster,menus.title))
     })
 }
 // function that handles do display a different movie
 function handleMovieClicks(id){
-    fetch(`https://levy-web.github.io/moringa-week-3-code--challenge/db.json`)
+    fetch(`https://my-json-server.typicode.com/levy-web/moringa-week-3-code--challenge/films/${id}`)
     .then(response => response.json())
-    .then((res) => {    
-        let data = (res.films)[id-1]
+    .then((data) => {
         const moviesItem = createMainItem(
         data.poster,
         data.title,
