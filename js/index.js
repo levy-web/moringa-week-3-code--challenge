@@ -69,7 +69,7 @@ function createMainItem(poster, title,runtime, showtime,id, capacity, tickets_so
 
     let availableTickets = capacity - tickets_sold
     let buyTicket = document.createElement("button");
-    if(availableTickets===0){
+    if(availableTickets<=0){
         buyTicket.innerHTML= "sold out"
     }else{
         buyTicket.innerHTML = ` click to book ticket, ${availableTickets} available`
@@ -79,13 +79,11 @@ function createMainItem(poster, title,runtime, showtime,id, capacity, tickets_so
     buyTicket.style.width = "33%"
     buyTicket.classList.add("btn", "btn-success","ml-2")
     buyTicket.addEventListener('click',(e)=>{
-        if(tickets_sold<capacity){
-            ++tickets_sold
+        ++tickets_sold
+        if(availableTickets>0){
             let avail = document.querySelector("button")
             avail.innerText = ` click to book ticket, ${--availableTickets} available`
             console.log(capacity)
-            console.log(tickets_sold)
-            confirm("buy ticket?")
             fetch(`https://my-json-server.typicode.com/levy-web/moringa-week-3-code--challenge/films/${id}`,{
             method: "PATCH",
   
@@ -100,7 +98,6 @@ function createMainItem(poster, title,runtime, showtime,id, capacity, tickets_so
           .then((json)=>console.log(json))
           
         }else {
-            alert("theatre is full")
             let soldOut = document.querySelector("button")
             soldOut.innerText = "sold out"
 
@@ -162,7 +159,7 @@ function createMenuItem(id, poster,title){
 
 }
 // funtion to load main movie(first movie display)
-function loadMovies(id) {
+function loadMovies() {
   
     fetch("https://my-json-server.typicode.com/levy-web/moringa-week-3-code--challenge/films/1")
         .then(response => response.json())
